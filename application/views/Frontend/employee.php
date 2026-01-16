@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>How to insert data into database
-                    <a href="<?php echo base_url('employee/add')?>" class="btn btn-primary float-right">Add Employee</a></h4>
+                    <a href="<?php echo base_url('employee/add')?>" class="btn btn-primary float-end">Add Employee</a></h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -31,8 +31,8 @@
                                 <td><?php echo $row->phone; ?></td>
                                 <td><?php echo $row->email; ?></td>
                                 <td>
-                                    <a href="" class="btn btn-primary">Edit</a>
-                                    <a href=" " class="btn btn-danger">Delete</a>
+                                    <a href="<?php echo base_url('employee/edit/'.$row->id); ?>" class="btn btn-primary">Edit</a>
+                                    <a href="<?php echo base_url('employee/delete/'.$row->id); ?>" class="btn btn-danger">Delete</a>
 
                                     </td>
                             </tr>
