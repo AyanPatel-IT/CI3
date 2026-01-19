@@ -22,4 +22,13 @@ $route['employee/update/(:any)']='Frontend/EmployeeController/update/$1';
 $route['employee/delete/(:any)']='Frontend/EmployeeController/delete/$1';
 
 
+// -----------------------------------------------------------------------------
+//Project Login system
+
+$route['login']='project/LoginController/index';
+$route['login/authenticate']='project/LoginController/authenticate';
+$route['homepage']='project/LoginController/home';
+
+
+
 
