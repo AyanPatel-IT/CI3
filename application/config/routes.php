@@ -28,6 +28,20 @@ $route['employee/delete/(:any)']='Frontend/EmployeeController/delete/$1';
 $route['login']='project/LoginController/index';
 $route['login/authenticate']='project/LoginController/authenticate';
 $route['homepage']='project/LoginController/home';
+$route['tickets']='project/LoginController/tickets';
+$route['raise_ticket']='project/LoginController/raise_ticket';
+$route['create_ticket']='project/LoginController/create_ticket';
+$route['ticket/delete/(:any)']='project/LoginController/delete_ticket/$1';
+$route['ticket/edit/(:any)']='project/LoginController/edit_ticket/$1';
+$route['ticket/update/(:any)']='project/LoginController/update_ticket/$1';
+$route['logout']='project/LoginController/logout';
+
+
+
+
+
+
+
 
 
 

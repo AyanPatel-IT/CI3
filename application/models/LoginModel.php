@@ -2,32 +2,41 @@
 
 class LoginModel extends CI_Model{
 
-    public function getUser($email,$pass){
+    public function getUser($email){
         
-        // $query=$this->db->get('users');
-        // $users = $query->result();
+    
+        $query = $this->db->select('id,password,role,email')
+                            ->where('email',$email)
+                            ->get('users')
+                            ->row();
 
-
-
-        // foreach ($users as $row) {
-        //     $row->email;
-        //     $row->pass;
-        //     $row->role;
-
-        //     // if($email==$dbemail && $pass==$dbpass){
-        //     //     redirect(base_url('homepage'));
-        //     // }
-        // }
-
-       $query = $this->db->get_where('users',['email'=>$email,'password'=>$pass]);
-        
-       return $query->row();
+        return $query;
        
+         }
+
+    public function setTicket($data){
+        $query= $this->db->insert('tickets',$data);
     }
 
-    // public function getRole($role){
-    //     $query = $this->db->get_where('users',['role'=>$role]);
-    //     return $query->row();
-        
-    // }
+    //To display data into table
+    public function getTicket(){
+        $query= $this->db->get('tickets');
+        return $query->result();
+    }
+
+    public function deleteTicket($id){
+        $query= $this->db->delete('tickets',['id'=>$id]);
+    }
+    
+    //To display data into edit ticket form
+    public function fetchTicket($id){
+        $query= $this->db->get_where('tickets',['id'=>$id]);
+        return $query->row();
+    }  
+
+    public function updateTicket($id,$data){
+        $query = $this->db->update('tickets',$data,['id'=>$id]);
+        return $query;
+    }
+
 }

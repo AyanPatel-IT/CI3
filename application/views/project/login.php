@@ -18,19 +18,40 @@
 
                     <div class="form-group">
                         <label for="pass">Password</label>
-                        <input type="password" name="pass" class="form-control">    
+                        <input type="password" name="pass" id="pass" class="form-control"> <br>
+                        <label class="">
+                            <input type="checkbox" onclick="showpass()"> Show Password
+                        </label>   
                         <small><?php echo form_error('pass')?></small>
                     </div>
-
+                   
                      <div class="form-group">
                         <button type="submit" class="btn btn-primary">Login</button>   
                     </div>
+                    <?php if($this->session->flashdata('error')):?>
+                        <p style="color:red;">
+                            <?= $this->session->flashdata('error'); ?>
+                        </p>
+                    <?php endif;?>
                 </div>
 
             </div>
         </div>
     </div>
   </div>
+                    <script>
+                       function showpass() {
+                         const pass = document.getElementById('pass');
+                         pass.type = pass.type === "password" ? "text" : "password";
+                            }  
+                            //Above code is similar to this 
+                            // if(pass.type==="password"){
+                            //     pass.type="text";
+                            // }else{
+                            //     pass.type="password";
+                                
+                            // }}
+                    </script>
   </form>
 
 
