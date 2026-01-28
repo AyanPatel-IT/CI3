@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container ">
     <div class="row mt-12 mb-12">
         <div class="col-md-20">
             <div class="card">
@@ -23,24 +23,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($tickets as $row){?>
+                            <?php foreach($tickets as $row):?>
                             <tr>
-                                <td><?php echo $row->id ?></td>
-                                <td class="text-nowrap"><?php echo $row->title ?></td>
-                                <td ><?php echo $row->description ?></td>
-                                <td><?php echo $row->comments ?></td>
-                                <td><?php echo $row->priority ?></td>
-                                <td><?php echo $row->status ?></td>
-                                <td class="text-nowrap"><?php echo $row->created_at ?></td>
-                                <td class="text-nowrap"><?php echo $row->updated_at ?></td>
+                                <td><?= $row->id ?></td>
+                                <td class="text-nowrap"><?= $row->title ?></td>
+                                <td ><?= $row->description ?></td>
+                                <td><?= $row->comments ?></td>
+                                <td><?= $row->priority ?></td>
+                                <td><?= $row->status ?></td>
+                                <td class="text-nowrap"><?= $row->created_at ?></td>
+                                <td class="text-nowrap"><?= $row->updated_at ?></td>
 
-                                <?php if($role=='admin'): ?>
+                                <?php if($role =='admin'): ?>
                                 <td><a href="<?php echo base_url('ticket/edit/'.$row->id)?>" class="btn btn-primary mt-2 mb-2 form-control">Edit</a>
                                     <a href="<?php echo base_url('ticket/delete/'.$row->id)?>" class="btn btn-danger mt-2 mb-2 form-control">Delete</a>
                                 </td>
                                 <?php endif;?>
 
-                                <?php if($role=='user'): ?>
+                                <?php if($role =='user'): ?>
                                 <td>
                                     <p>Access Denied</p>
                                 </td>
@@ -49,7 +49,7 @@
 
 
                             </tr>
-                            <?php }?>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>

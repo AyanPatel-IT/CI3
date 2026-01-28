@@ -23,7 +23,7 @@ $route['employee/delete/(:any)']='Frontend/EmployeeController/delete/$1';
 
 
 // -----------------------------------------------------------------------------
-//Project Login system
+//Project Ticket system
 
 $route['login']='project/LoginController/index';
 $route['login/authenticate']='project/LoginController/authenticate';
@@ -35,6 +35,8 @@ $route['ticket/delete/(:any)']='project/LoginController/delete_ticket/$1';
 $route['ticket/edit/(:any)']='project/LoginController/edit_ticket/$1';
 $route['ticket/update/(:any)']='project/LoginController/update_ticket/$1';
 $route['logout']='project/LoginController/logout';
+$route['test_cache']='project/LoginController/test_cache';
+
 
 
 

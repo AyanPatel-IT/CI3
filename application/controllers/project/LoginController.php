@@ -40,7 +40,7 @@ class LoginController extends CI_Controller{
                 $pass=$this->input->post('pass');
 
 
-                $this->load->model('LoginModel');
+                // $this->load->model('LoginModel');
                 // $user = $this->LoginModel->getUser($email);
                 
                 // if(!$user){
@@ -72,7 +72,7 @@ class LoginController extends CI_Controller{
                 exit;
                  }catch(Exception $e){
                     // show_error($e->getMessage(),401);
-                     $this->session->set_flashdata('error', $e->getMessage());
+                    $this->session->set_flashdata('error', $e->getMessage());
                     redirect(base_url('login'));
                  }
               
@@ -126,36 +126,49 @@ class LoginController extends CI_Controller{
             $this->form_validation->set_rules('title','Title','required');
             $this->form_validation->set_rules('description','Description','required|min_length[20]');
 
-            if($this->form_validation->run()){
+            if(!$this->form_validation->run()){
+                return $this->raise_ticket();}
 
-                $data=[
-                    'title'=>$this->input->post('title'),
-                    'description'=>$this->input->post('description'),
-                    'priority'=>'Medium',  //Default values taken as - Medium,Open
-                    'status'=>'Open'
+                // $data=[
+                //     'title'=>$this->input->post('title'),
+                //     'description'=>$this->input->post('description'),
+                //     'priority'=>'Medium',  //Default values taken as - Medium,Open
+                //     'status'=>'Open'
 
-                ];
+                // ];
 
-                $this->load->model('/LoginModel');
-                $this->LoginModel->setTicket($data);
+                // $this->load->model('/LoginModel');
+                // $this->LoginModel->setTicket($data);
+                //--
+                $title= $this->input->post('title');
+                $description=$this->input->post('description');
+
+                $this->ticketservice->createTicket($title,$description);
+                //--
                 redirect(base_url('tickets'));
-            }else{
-                $this->raise_ticket();
-        }
-
+       
 }
 
 public function delete_ticket($id){
-    $this->load->model('/LoginModel');
-    $this->LoginModel->deleteTicket($id);
-    $this->tickets();
+    //--
+    $this->ticketservice->delTicket($id);
+    //--
+    
+    // $this->load->model('/LoginModel');
+    // $this->LoginModel->deleteTicket($id);
+
+    redirect(base_url('tickets'));
 }
 
 public function edit_ticket($id){
     
          $this->load->view('prjTemplate/header');
-         $this->load->model('/LoginModel');
-         $data['ticket']=$this->LoginModel->fetchTicket($id);
+
+        //  $this->load->model('/LoginModel');
+        //  $data['ticket']=$this->LoginModel->fetchTicket($id);
+        //--
+         $data['ticket'] = $this->ticketservice->editTicket($id);
+        //--
          $this->load->view('project/EditTicket',$data);
          $this->load->view('prjTemplate/footer'); 
 
@@ -170,8 +183,10 @@ public function update_ticket($id){
             'status' => $this->input->post('status')
         ];
 
-        $this->load->model('/LoginModel');
-        $this->LoginModel->updateTicket($id,$data);
+        $this->ticketservice->updateTicket($id,$data);
+
+        // $this->load->model('/LoginModel');
+        // $this->LoginModel->updateTicket($id,$data);
         redirect(base_url('tickets'));
 
 }
@@ -181,4 +196,16 @@ public function logout(){
     echo "You have been Logged Out!!";
     redirect(base_url('login'));
 }
+
+// public function test_cache()
+// {
+//     $this->load->driver('cache', ['adapter' => 'file']);
+
+// var_dump($this->cache->save('abc', '123', 600));
+// var_dump($this->cache->get('abc'));
+// exit;
+
+// }
+
 }
+
