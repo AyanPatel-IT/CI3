@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 $route['abouts'] = 'Welcome/demo';
@@ -14,37 +14,28 @@ $route['blog/(:num)'] = 'PageController/blog/$1';
 
 
 // ------------------------------------
-$route['employee']='Frontend/EmployeeController/index';
-$route['employee/add']='Frontend/EmployeeController/create';
-$route['employee/store']='Frontend/EmployeeController/store';
-$route['employee/edit/(:any)']='Frontend/EmployeeController/edit/$1';
-$route['employee/update/(:any)']='Frontend/EmployeeController/update/$1';
-$route['employee/delete/(:any)']='Frontend/EmployeeController/delete/$1';
+$route['employee'] = 'Frontend/EmployeeController/index';
+$route['employee/add'] = 'Frontend/EmployeeController/create';
+$route['employee/store'] = 'Frontend/EmployeeController/store';
+$route['employee/edit/(:any)'] = 'Frontend/EmployeeController/edit/$1';
+$route['employee/update/(:any)'] = 'Frontend/EmployeeController/update/$1';
+$route['employee/delete/(:any)'] = 'Frontend/EmployeeController/delete/$1';
 
 
-// -----------------------------------------------------------------------------
-//Project Ticket system
+//------------------------------------------------------------------------------
+//----------------------------Project Ticket system-----------------------------
 
-$route['login']='project/LoginController/index';
-$route['login/authenticate']='project/LoginController/authenticate';
-$route['homepage']='project/LoginController/home';
-$route['tickets']='project/LoginController/tickets';
-$route['raise_ticket']='project/LoginController/raise_ticket';
-$route['create_ticket']='project/LoginController/create_ticket';
-$route['ticket/delete/(:any)']='project/LoginController/delete_ticket/$1';
-$route['ticket/edit/(:any)']='project/LoginController/edit_ticket/$1';
-$route['ticket/update/(:any)']='project/LoginController/update_ticket/$1';
-$route['logout']='project/LoginController/logout';
-$route['test_cache']='project/LoginController/test_cache';
+//Login Routes
 
+$route['login'] = 'project/LoginController/login';
+$route['login/authenticate'] = 'project/LoginController/authenticate';
+$route['logout'] = 'project/LoginController/logout';
 
-
-
-
-
-
-
-
-
-
-
+//Ticket Routes
+$route['homepage'] = 'project/TicketController/home';
+$route['tickets'] = 'project/TicketController/tickets';
+$route['raiseTicket'] = 'project/TicketController/raiseTicket';
+$route['createTicket'] = 'project/TicketController/createTicket';
+$route['ticket/delete/(:any)'] = 'project/TicketController/deleteTicket/$1';
+$route['ticket/edit/(:any)'] = 'project/TicketController/editTicket/$1';
+$route['ticket/update/(:any)'] = 'project/TicketController/updateTicket/$1';
