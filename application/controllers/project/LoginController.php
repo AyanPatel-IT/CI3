@@ -54,9 +54,11 @@ class LoginController extends CI_Controller
       $user = $this->loginservice->authen($email, $pass);
 
       $this->session->set_userdata([
+        'id' => $user['id'],
         'email' => $user['email'],
         'role' => $user['role'],
-        'is_logged_in' => TRUE
+        'is_logged_in' => TRUE,
+        // 'id'=>$user['id']
       ]);
 
       // $this->session->set_userdata('email',$user->email);
@@ -65,9 +67,6 @@ class LoginController extends CI_Controller
       // if($pass!=$user->password){
       //     redirect(base_url('login'));
       // }
-
-
-
       redirect(base_url('homepage'));
       exit;
     } catch (Exception $e) {

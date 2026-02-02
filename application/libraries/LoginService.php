@@ -8,7 +8,6 @@ class LoginService
   protected $cache;
   public function __construct()
   {
-
     $CI = &get_instance();
     $CI->load->model('LoginModel'); //since we are not in a controller, we must use $CI.
     $this->loginModel = $CI->LoginModel;  //Now your service can do: $this->loginModel->getUser($email); Instead of:$CI->LoginModel->getUser($email);

@@ -61,15 +61,18 @@
               <!-- <small><?php echo form_error('phone')  ?></small> -->
             </div>
 
-            <!-- <div class="form-group">
-              <?php foreach ($ticket as $row): ?>
-                <label for="assign">Assign To:</label>
-                <select name="assign" id="assign" class="form-select form-control" value="<?php echo $ticket->assigned_to; ?>">
-                  <option value=""><?php $ticket->assigned_to; ?></option>
-                </select>
-              <?php endforeach; ?>
+            <div class="form-group">
 
-            </div> -->
+              <label for="assign">Assign To:</label>
+              <select name="assign" id="assign" class="form-select form-control" value="<?php echo $ticket->user_id; ?>">
+                <option value="" disabled selected hidden>
+                  Assign User
+                </option>
+                <?php foreach ($assign as $row): ?>
+                  <option value="<?php echo $row->id; ?>" <?php echo $ticket->user_id == $row->id ? 'selected' : '' ?>> <?php echo $row->name; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
 
 
 

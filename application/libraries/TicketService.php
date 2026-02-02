@@ -23,7 +23,7 @@ class TicketService
   }
 
 
-  public function getTicketData()
+  public function getTicketData($data)
   {
     // if(!$this->auth->can('ticket.view')){
     //     throw new Exception('Unauthorized Action');
@@ -36,9 +36,9 @@ class TicketService
     }
     log_message('error', 'Ticket from DB');
 
-    $ticketCache = $this->ticketModel->getTicket();
+    $ticketCache = $this->ticketModel->getTicket($data);
 
-    $this->cache->save('tickets_list', $ticketCache, 600);
+    $this->cache->save('tickets_list_' . $data['id'], $ticketCache, 600);
 
     return $ticketCache;
   }
@@ -91,5 +91,10 @@ class TicketService
 
     $this->cache->delete('tickets_list');
     return $this->ticketModel->updateTicket($id, $data);
+  }
+
+  public function fetchEmail()
+  {
+    return $this->ticketModel->fetchEmail();
   }
 }

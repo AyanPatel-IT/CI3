@@ -67,9 +67,12 @@ class TicketController extends CI_Controller
 
     // $data=array_merge($data,$roleSession); not needed
     //--
+    $data['id'] = $this->session->userdata('id');
     $data['role'] = $this->session->userdata('role');
+    $data['email'] = $this->session->userdata('email');
+    $data['fetchName'] = $this->ticketservice->fetchEmail();
 
-    $tickets = $this->ticketservice->getTicketData();
+    $tickets = $this->ticketservice->getTicketData($data);
     $data['tickets'] = $tickets;
     //--
     $this->load->view('prjTemplate/header');
@@ -159,7 +162,9 @@ class TicketController extends CI_Controller
     //  $data['ticket']=$this->LoginModel->fetchTicket($id);
     //--
     $data['ticket'] = $this->ticketservice->editTicket($id);
-    
+
+    $data['assign'] = $this->ticketservice->fetchEmail();
+
     //--
     $this->load->view('project/editTicket', $data);
     $this->load->view('prjTemplate/footer');
@@ -180,7 +185,9 @@ class TicketController extends CI_Controller
     $data = [
       'comments' => $this->input->post('comments'),
       'priority' => $this->input->post('priority'),
-      'status' => $this->input->post('status')
+      'status' => $this->input->post('status'),
+      'user_id' => $this->input->post('assign'),
+      // 'user_id' => 
     ];
 
     $this->ticketservice->updateTicket($id, $data);
