@@ -18,24 +18,43 @@ class TicketModel extends CI_Model
 
   //To display data into table
   public function getTicket($data)
-  { //if role=user then only fetch those tickets
-    // Print_r($data);
-    // exit;
-    if ($data['role'] === 'user') {
+  {
+    // if ($data['role'] === 'user'){
+    //   $this->db->where('user_id', $data['id']);
+    //   if (!empty($data['filterStatus'])) {
+    //     $this->db->where('status', $data['filterStatus']);
+    //   }
+    //   $query = $this->db->get('tickets');
+    //   return $query->result();
+    // } else if ($data['role'] === 'admin') {
+    //   if (!empty($data['filterStatus'])) {
+    //     $this->db->where('status', $data['filterStatus']);
+    //   }
+    //   $query = $this->db->get('tickets');
+    //   return $query->result();
+    // }
 
-      $query = $this->db->get_where('tickets', ['user_id' => $data['id']]);
+    if ($data['role'] !== 'admin') {
+      $this->db->where('user_id', $data['id']);
     }
-    // return $query->result();
-    else {
-      $query = $this->db->get('tickets');
-      // return $query->result();
+    if (!empty($data['filterStatus'])) {
+      $this->db->where('status', $data['filterStatus']);
     }
+    if (!empty($data['filterPriority'])) {
+      $this->db->where('priority', $data['filterPriority']);
+    }
+    if (!empty($data['searchbar'])) {
+      $this->db->like('title', $data['searchbar'])
+        ->or_like('comments', $data['searchbar'])
+        ->or_like('description', $data['searchbar']);
+    }
+    $query = $this->db->get('tickets');
     return $query->result();
   }
 
   public function deleteTicket($id)
   {
-    $query = $this->db->delete('tickets', ['id' => $id]);
+    $this->db->delete('tickets', ['id' => $id]);
   }
 
   //To display data into edit ticket form

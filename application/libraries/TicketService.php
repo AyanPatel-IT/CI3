@@ -97,4 +97,8 @@ class TicketService
   {
     return $this->ticketModel->fetchEmail();
   }
+
+  // public function statusFilter($status) {
+  //   $this->ticketModel->getStatusFilter($status);
+  // }
 }

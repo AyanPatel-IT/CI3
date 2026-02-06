@@ -10,6 +10,28 @@
         </div>
         <div class="card-body">
           <table class="table table-bordered table table-responsive">
+            <form action="<?= base_url('tickets') ?>" method="get">
+              <div><label for="">Filter: </label>
+                <select name="filterStatus" id="filterStatus" class="">
+                  <option value="" disabled selected hidden>Select Status</option>
+                  <option value="Open" <?= $status == 'Open' ? 'selected' : '' ?>>Open</option>
+                  <option value="Solved" <?= $status == 'Solved' ? 'selected' : '' ?>>Solved</option>
+                  <option value="Closed" <?= $status == 'Closed' ? 'selected' : '' ?>>Closed</option>
+                </select>
+
+                <!-- <div><label for=""><b>Priority</b> </label> -->
+                  <select name="filterPriority" id="filterPriority" class="">
+                    <option value="" disabled selected hidden>Select Priority</option>
+                    <option value="High" <?= $priority == 'High' ? 'selected' : '' ?>>High</option>
+                    <option value="Medium" <?= $priority == 'Medium' ? 'selected' : '' ?>>Medium</option>
+                    <option value="Low" <?= $priority == 'Low' ? 'selected' : '' ?>>Low</option>
+                  </select>
+
+                  <input type="text" placeholder="Search" name="searchbar">
+                  <button type="submit" class="btn btn-success">Filter</button>
+                  <a href="<?php echo base_url('tickets/resetFilters') ?>" class="btn btn-danger ">Reset</a>
+                </div>
+            </form>
             <thead>
               <tr>
 
@@ -47,7 +69,7 @@
                   <td class="text-nowrap"><?= $row->created_at ?></td>
                   <td class="text-nowrap"><?= $row->updated_at ?></td>
 
-
+                             
                   <td><a href="<?php echo base_url('ticket/edit/' . $row->id) ?>" class="btn btn-primary mt-2 mb-2 form-control">Edit</a>
                     <a href="<?php echo base_url('ticket/delete/' . $row->id) ?>" class="btn btn-danger mt-2 mb-2 form-control">Delete</a>
                   </td>

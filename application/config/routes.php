@@ -34,6 +34,8 @@ $route['logout'] = 'project/LoginController/logout';
 //Ticket Routes
 $route['homepage'] = 'project/TicketController/home';
 $route['tickets'] = 'project/TicketController/tickets';
+$route['statusFilter'] = 'project/TicketController/statusFilter'; 
+$route['tickets/resetFilters'] = 'project/TicketController/resetFilters';
 $route['raiseTicket'] = 'project/TicketController/raiseTicket';
 $route['createTicket'] = 'project/TicketController/createTicket';
 $route['ticket/delete/(:any)'] = 'project/TicketController/deleteTicket/$1';

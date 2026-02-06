@@ -71,6 +71,22 @@ class TicketController extends CI_Controller
     $data['role'] = $this->session->userdata('role');
     $data['email'] = $this->session->userdata('email');
     $data['fetchName'] = $this->ticketservice->fetchEmail();
+    $data['filterStatus'] = $this->input->get('filterStatus');
+    $data['filterPriority'] = $this->input->get('filterPriority');
+    $data['searchbar'] = $this->input->get('searchbar');
+
+
+
+
+    if($data['filterStatus']){
+      $this->session->set_userdata('filterStatus',$data['filterStatus']);
+    }
+    $data['status']=$this->session->userdata('filterStatus');
+    
+    if($data['filterPriority']){
+      $this->session->set_userdata('filterPriority',$data['filterPriority']);
+    }
+    $data['priority']= $this->session->userdata('filterPriority');
 
     $tickets = $this->ticketservice->getTicketData($data);
     $data['tickets'] = $tickets;
@@ -78,6 +94,13 @@ class TicketController extends CI_Controller
     $this->load->view('prjTemplate/header');
     $this->load->view('project/ticketModule', $data);
     $this->load->view('prjTemplate/footer');
+  }
+
+  public function resetFilters(){
+    $this->session->unset_userdata('filterStatus');
+    $this->session->unset_userdata('filterPriority');
+
+    redirect(base_url('tickets'));
   }
 
   public function createTicket()
@@ -196,4 +219,10 @@ class TicketController extends CI_Controller
     // $this->LoginModel->updateTicket($id,$data);
     redirect(base_url('tickets'));
   }
+
+  // public function statusFilter()
+  // {
+  //   $status = $this->input->get('filterStatus');
+  //   $this->ticketservice->statusFilter($status);
+  // }
 }
